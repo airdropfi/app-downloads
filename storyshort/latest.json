@@ -7,8 +7,28 @@
   "minAndroid": "7.0 (API 24)",
   "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/storyshort-v1.0.4",
   "files": [
-    {"abi": "arm64-v8a", "recommended": true, "versionCode": 2126, "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.4/StoryShort-1.0.4-arm64-v8a.apk", "sha256": "c725ccbfd494d4b764d464686667b9767d5a095fefcc36cf1a332820be0f406f", "bytes": 41705617},
-    {"abi": "armeabi-v7a", "versionCode": 1126, "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.4/StoryShort-1.0.4-armeabi-v7a.apk", "sha256": "d4c7288e63a5e9033d153d88ab878b1a17d8dc694355d85edaa6a62eba0ad66b", "bytes": 38946183}
+    {
+      "abi": "arm64-v8a",
+      "versionCode": 2126,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.4/StoryShort-1.0.4-arm64-v8a.apk",
+      "sha256": "c725ccbfd494d4b764d464686667b9767d5a095fefcc36cf1a332820be0f406f",
+      "bytes": 41705617,
+      "recommended": true
+    },
+    {
+      "abi": "armeabi-v7a",
+      "versionCode": 1126,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.4/StoryShort-1.0.4-armeabi-v7a.apk",
+      "sha256": "d4c7288e63a5e9033d153d88ab878b1a17d8dc694355d85edaa6a62eba0ad66b",
+      "bytes": 38946183
+    },
+    {
+      "abi": "universal",
+      "versionCode": 126,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.4/StoryShort-1.0.4-universal.apk",
+      "sha256": "0f1e1545c83917b74dd1a838184b98c5537e1fe8ac9c20881aca70325026ba13",
+      "bytes": 98076906
+    }
   ],
   "appStore": "https://apps.apple.com/app/id6797226564"
 }
