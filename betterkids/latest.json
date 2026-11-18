@@ -2,34 +2,34 @@
   "app": "BetterKids: Learn & Explore",
   "package": "com.kienphan.betterkids",
   "version": "1.0.5",
-  "versionCode": 503,
+  "versionCode": 504,
   "released": "2026-11-19",
   "minAndroid": "7.0 (API 24)",
-  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/betterkids-v1.0.5-b503",
-  "sourceRef": "715a0a8",
-  "sourceSha": "715a0a8c45d4f74edc3382b58f60814e2cc0d826",
+  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/betterkids-v1.0.5-b504",
+  "sourceRef": "f2850bb",
+  "sourceSha": "f2850bb51e021e8b12019969f0391a0a790ad3a4",
   "files": [
     {
       "abi": "arm64-v8a",
-      "versionCode": 2503,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/betterkids-v1.0.5-b503/BetterKids-1.0.5-arm64-v8a.apk",
-      "sha256": "18e80d3dfce7aed6e814521c758edea714b1963eef639751a06ec7bc77802ac7",
-      "bytes": 38978695,
+      "versionCode": 2504,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/betterkids-v1.0.5-b504/BetterKids-1.0.5-arm64-v8a.apk",
+      "sha256": "c934290bd3663ebaea8cad2078f91a7d8b7090a2f6a01f57a181895431eb0217",
+      "bytes": 47774285,
       "recommended": true
     },
     {
       "abi": "armeabi-v7a",
-      "versionCode": 1503,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/betterkids-v1.0.5-b503/BetterKids-1.0.5-armeabi-v7a.apk",
-      "sha256": "435f1f77d167853a7de69b1a31e183be25b89c1d7a6c1c838f2525190c6096f4",
-      "bytes": 36726425
+      "versionCode": 1504,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/betterkids-v1.0.5-b504/BetterKids-1.0.5-armeabi-v7a.apk",
+      "sha256": "ea0a2d6a7fdb74bf003b50e6c0ac71acab14257dfd16ad8b9df68f7360bbaeed",
+      "bytes": 45800539
     },
     {
       "abi": "universal",
-      "versionCode": 503,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/betterkids-v1.0.5-b503/BetterKids-1.0.5-universal.apk",
-      "sha256": "6a2060a5c2eedd4000ac49639b81fc0f38a011417e3ce970715c3db13a74ca14",
-      "bytes": 87693094
+      "versionCode": 504,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/betterkids-v1.0.5-b504/BetterKids-1.0.5-universal.apk",
+      "sha256": "1cd2ed7b89e3fc7b1ca722c102d465a631ef182a8ce5199c754d6741c7858117",
+      "bytes": 100437224
     }
   ],
   "appStore": "https://apps.apple.com/app/id6797240519"
