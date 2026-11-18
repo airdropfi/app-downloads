@@ -1,0 +1,34 @@
+{
+  "app": "BillsAI Expense Tracker",
+  "package": "com.kienphan.billsai",
+  "version": "1.0.2",
+  "versionCode": 5,
+  "released": "2026-11-18",
+  "minAndroid": "7.0 (API 24)",
+  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/billsai-v1.0.2",
+  "files": [
+    {
+      "abi": "arm64-v8a",
+      "versionCode": 2005,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.2/BillsAI-1.0.2-arm64-v8a.apk",
+      "sha256": "8af7744aa098a308e6f7da1c15ba4e2be20ade3f072484f12ad7f29e6c8b9797",
+      "bytes": 25871734,
+      "recommended": true
+    },
+    {
+      "abi": "armeabi-v7a",
+      "versionCode": 1005,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.2/BillsAI-1.0.2-armeabi-v7a.apk",
+      "sha256": "fe7a7c96e3d6de402cc732732ba4aed92f303e271a978b306516e788e64f859c",
+      "bytes": 23285654
+    },
+    {
+      "abi": "universal",
+      "versionCode": 5,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.2/BillsAI-1.0.2-universal.apk",
+      "sha256": "810d57637cd5f109fa166e38de4d3a1b21553c3f10d2c715488d58d039c2ca8a",
+      "bytes": 63458914
+    }
+  ],
+  "appStore": "https://apps.apple.com/app/id6759242647"
+}
