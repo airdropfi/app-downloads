@@ -1,33 +1,35 @@
 {
   "app": "StoryShort AI Video",
   "package": "com.kienphan.storyshort",
-  "version": "1.0.4",
-  "versionCode": 126,
+  "version": "1.0.5",
+  "versionCode": 127,
   "released": "2026-11-18",
   "minAndroid": "7.0 (API 24)",
-  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/storyshort-v1.0.4",
+  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/storyshort-v1.0.5-b127",
+  "sourceRef": "917a3c43b",
+  "sourceSha": "917a3c43b856c94fba4c59a9a32833948cd110cd",
   "files": [
     {
       "abi": "arm64-v8a",
-      "versionCode": 2126,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.4/StoryShort-1.0.4-arm64-v8a.apk",
-      "sha256": "c725ccbfd494d4b764d464686667b9767d5a095fefcc36cf1a332820be0f406f",
-      "bytes": 41705617,
+      "versionCode": 2127,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.5-b127/StoryShort-1.0.5-arm64-v8a.apk",
+      "sha256": "32ad552f15329d43acff8502b7a8bcbe773ae6cd9e84538ad0fdfcbbaa283972",
+      "bytes": 41705621,
       "recommended": true
     },
     {
       "abi": "armeabi-v7a",
-      "versionCode": 1126,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.4/StoryShort-1.0.4-armeabi-v7a.apk",
-      "sha256": "d4c7288e63a5e9033d153d88ab878b1a17d8dc694355d85edaa6a62eba0ad66b",
-      "bytes": 38946183
+      "versionCode": 1127,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.5-b127/StoryShort-1.0.5-armeabi-v7a.apk",
+      "sha256": "49296c8334ff06e950f5f806465c681f0e3b3ececedbd46dc2cfb3fd060198a4",
+      "bytes": 38962571
     },
     {
       "abi": "universal",
-      "versionCode": 126,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.4/StoryShort-1.0.4-universal.apk",
-      "sha256": "0f1e1545c83917b74dd1a838184b98c5537e1fe8ac9c20881aca70325026ba13",
-      "bytes": 98076906
+      "versionCode": 127,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.5-b127/StoryShort-1.0.5-universal.apk",
+      "sha256": "4eed629fba5d132b3047cb305e7c7cca8c00f4356afef69f78638b92e75faa57",
+      "bytes": 98093290
     }
   ],
   "appStore": "https://apps.apple.com/app/id6797226564"
