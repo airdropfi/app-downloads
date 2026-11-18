@@ -10,7 +10,7 @@ Install steps: download the APK for your phone (arm64-v8a for almost every phone
 
 Update checks: fetch `https://raw.githubusercontent.com/airdropfi/app-downloads/main/<app>/latest.json`.
 
-Apps: storyshort, betterkids, billsai, sportmo. Mac: see each product's Mac App Store listing.
+Apps: storyshort, betterkids, billsai, sportmo, bugsly. Mac: see each product's Mac App Store listing.
 
 ## Signing
 
