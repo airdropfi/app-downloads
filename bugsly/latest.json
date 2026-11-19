@@ -1,34 +1,35 @@
 {
   "app": "Bugsly",
   "package": "com.kienphan.bugsly",
-  "version": "1.0.2",
-  "versionCode": 4,
-  "released": "2026-11-18",
+  "version": "1.0.3",
+  "versionCode": 502,
+  "released": "2026-11-19",
   "minAndroid": "7.0 (API 24)",
-  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/bugsly-v1.0.2",
+  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/bugsly-v1.0.3-b502",
+  "sourceRef": "origin/main",
+  "sourceSha": "806b12703dfb8f652119a5668dfa42b88b9c669d",
   "files": [
     {
       "abi": "arm64-v8a",
-      "versionCode": 2004,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/bugsly-v1.0.2/Bugsly-1.0.2-arm64-v8a.apk",
-      "sha256": "4f41a596089be0147b49b629747717f7b8c4ef9ad554881f37c6071d6d7fde12",
-      "bytes": 18041925,
+      "versionCode": 2502,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/bugsly-v1.0.3-b502/Bugsly-1.0.3-arm64-v8a.apk",
+      "sha256": "e66e0c15bee4f8869a90262efd458ab05ee60815259eecfa68ad0a3db8b464c1",
+      "bytes": 19580301,
       "recommended": true
     },
     {
       "abi": "armeabi-v7a",
-      "versionCode": 1004,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/bugsly-v1.0.2/Bugsly-1.0.2-armeabi-v7a.apk",
-      "sha256": "a9e7e0e02b6aabcc9784e12f8ad0e300567ca8461d40c4a3a5429fc40258bcb6",
-      "bytes": 15554675
+      "versionCode": 1502,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/bugsly-v1.0.3-b502/Bugsly-1.0.3-armeabi-v7a.apk",
+      "sha256": "6e4aad0060cb1a4d6de7cf7a4c2b8b78c06522bc47c3d745c536bedd6e441f13",
+      "bytes": 16983273
     },
     {
       "abi": "universal",
-      "versionCode": 4,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/bugsly-v1.0.2/Bugsly-1.0.2-universal.apk",
-      "sha256": "7e259655db6f1fbad68d77c1d6ab8919bd688921bd9d918c0db9a1763e853494",
-      "bytes": 51063864
+      "versionCode": 502,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/bugsly-v1.0.3-b502/Bugsly-1.0.3-universal.apk",
+      "sha256": "0213ab054bdfa14125bb3f58cdee9134e4a7c9df0d102e8b6416f8e6148f3856",
+      "bytes": 54430203
     }
-  ],
-  "appStore": "https://apps.apple.com/app/id6799332568"
+  ]
 }
