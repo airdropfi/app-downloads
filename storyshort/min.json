@@ -6,9 +6,13 @@
   "downloadUrl": "https://github.com/airdropfi/app-downloads/releases/tag/storyshort-v1.0.5-b127",
   "updated": "2026-11-19",
   "ios": {
+    "latestVersion": "1.0.3",
+    "latestBuild": 124,
     "minSupportedBuild": 0
   },
   "macos": {
+    "latestVersion": "1.0.3",
+    "latestBuild": 119,
     "minSupportedBuild": 0
   }
 }
