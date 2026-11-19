@@ -1,0 +1,15 @@
+{
+  "app": "aisend",
+  "minSupportedBuild": 0,
+  "ios": {
+    "latestVersion": "1.0",
+    "latestBuild": 14,
+    "minSupportedBuild": 0
+  },
+  "macos": {
+    "latestVersion": "1.0.1",
+    "latestBuild": 15,
+    "minSupportedBuild": 0
+  },
+  "updated": "2026-11-19"
+}
