@@ -6,9 +6,13 @@
   "downloadUrl": "https://github.com/airdropfi/app-downloads/releases/tag/bugsly-v1.0.2",
   "updated": "2026-11-19",
   "ios": {
+    "latestVersion": "1.0.2",
+    "latestBuild": 4,
     "minSupportedBuild": 0
   },
   "macos": {
+    "latestVersion": "1.0.0",
+    "latestBuild": 2,
     "minSupportedBuild": 0
   }
 }
