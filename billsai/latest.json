@@ -1,35 +1,35 @@
 {
   "app": "BillsAI Expense Tracker",
   "package": "com.kienphan.billsai",
-  "version": "1.0.4",
-  "versionCode": 502,
-  "released": "2026-11-18",
+  "version": "1.0.5",
+  "versionCode": 503,
+  "released": "2026-11-19",
   "minAndroid": "7.0 (API 24)",
-  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/billsai-v1.0.4-b502",
-  "sourceRef": "android-twin/billsai-1.0.4",
-  "sourceSha": "012bebdf378ff3efe29ec658474a89ae8cd391d4",
+  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/billsai-v1.0.5-b503",
+  "sourceRef": "origin/main",
+  "sourceSha": "7868a27d01df751fd72bd67c5e3e8e347f3fabdf",
   "files": [
     {
       "abi": "arm64-v8a",
-      "versionCode": 2502,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.4-b502/BillsAI-1.0.4-arm64-v8a.apk",
-      "sha256": "5c9ae61915e6202c4131dca476fa96d4eecbd873dba314f2f83870d377e74832",
-      "bytes": 25872118,
+      "versionCode": 2503,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.5-b503/BillsAI-1.0.5-arm64-v8a.apk",
+      "sha256": "144a9f2a63c96a011b40baa2ea2823e628e1689c154c61d131c92761c6137b71",
+      "bytes": 26447859,
       "recommended": true
     },
     {
       "abi": "armeabi-v7a",
-      "versionCode": 1502,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.4-b502/BillsAI-1.0.4-armeabi-v7a.apk",
-      "sha256": "a15eeb7f825a06ea565540f5283ba9ec8a86e5430d328fba5a1d4caef6cf9436",
-      "bytes": 23318810
+      "versionCode": 1503,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.5-b503/BillsAI-1.0.5-armeabi-v7a.apk",
+      "sha256": "7636838743673c13a992c800ab3afa0e38cae8f70cf20893fb9e3d8db14bf499",
+      "bytes": 23714323
     },
     {
       "abi": "universal",
-      "versionCode": 502,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.4-b502/BillsAI-1.0.4-universal.apk",
-      "sha256": "88f9bc667f884677691764d22992ed6d77df2bfe762eb6c5a4d12b4bbe27d38e",
-      "bytes": 63557606
+      "versionCode": 503,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/billsai-v1.0.5-b503/BillsAI-1.0.5-universal.apk",
+      "sha256": "60b073bc64d00c139578e9e7370abdd24f4d5b16b0e1e1390c7193ba62e72765",
+      "bytes": 65935583
     }
   ],
   "appStore": "https://apps.apple.com/app/id6759242647"
