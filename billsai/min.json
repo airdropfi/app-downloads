@@ -6,6 +6,8 @@
   "downloadUrl": "https://github.com/airdropfi/app-downloads/releases/tag/billsai-v1.0.4-b502",
   "updated": "2026-11-19",
   "ios": {
+    "latestVersion": "1.0.3",
+    "latestBuild": 18,
     "minSupportedBuild": 0
   },
   "macos": {
