@@ -6,9 +6,13 @@
   "downloadUrl": "https://github.com/airdropfi/app-downloads/releases/tag/betterkids-v1.0.5-b504",
   "updated": "2026-11-19",
   "ios": {
+    "latestVersion": "1.0.4",
+    "latestBuild": 16,
     "minSupportedBuild": 0
   },
   "macos": {
+    "latestVersion": "1.0.1",
+    "latestBuild": 4,
     "minSupportedBuild": 0
   }
 }
