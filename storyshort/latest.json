@@ -1,35 +1,35 @@
 {
   "app": "StoryShort AI Video",
   "package": "com.kienphan.storyshort",
-  "version": "1.0.5",
-  "versionCode": 127,
-  "released": "2026-11-18",
+  "version": "1.0.6",
+  "versionCode": 128,
+  "released": "2026-11-19",
   "minAndroid": "7.0 (API 24)",
-  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/storyshort-v1.0.5-b127",
-  "sourceRef": "917a3c43b",
-  "sourceSha": "917a3c43b856c94fba4c59a9a32833948cd110cd",
+  "releaseUrl": "https://github.com/airdropfi/app-downloads/releases/tag/storyshort-v1.0.6-b128",
+  "sourceRef": "origin/main",
+  "sourceSha": "57b324c2a68ab4064096adccaf8bf8f8e2d4354b",
   "files": [
     {
       "abi": "arm64-v8a",
-      "versionCode": 2127,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.5-b127/StoryShort-1.0.5-arm64-v8a.apk",
-      "sha256": "32ad552f15329d43acff8502b7a8bcbe773ae6cd9e84538ad0fdfcbbaa283972",
-      "bytes": 41705621,
+      "versionCode": 2128,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.6-b128/StoryShort-1.0.6-arm64-v8a.apk",
+      "sha256": "c2da95c06b8fe1bf2f58fc4d14dd229b32141e0ee87ab79d8a29f1e0d01f7904",
+      "bytes": 42481376,
       "recommended": true
     },
     {
       "abi": "armeabi-v7a",
-      "versionCode": 1127,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.5-b127/StoryShort-1.0.5-armeabi-v7a.apk",
-      "sha256": "49296c8334ff06e950f5f806465c681f0e3b3ececedbd46dc2cfb3fd060198a4",
-      "bytes": 38962571
+      "versionCode": 1128,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.6-b128/StoryShort-1.0.6-armeabi-v7a.apk",
+      "sha256": "df3fa01608c94d43342efa96f23196fd57409c00a1577ae2c5df09bc6553076a",
+      "bytes": 39640022
     },
     {
       "abi": "universal",
-      "versionCode": 127,
-      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.5-b127/StoryShort-1.0.5-universal.apk",
-      "sha256": "4eed629fba5d132b3047cb305e7c7cca8c00f4356afef69f78638b92e75faa57",
-      "bytes": 98093290
+      "versionCode": 128,
+      "url": "https://github.com/airdropfi/app-downloads/releases/download/storyshort-v1.0.6-b128/StoryShort-1.0.6-universal.apk",
+      "sha256": "55fa8185496d1130708122ae6fdca772d6151a890f4e1e9a3c61c9e4cbcb0ae8",
+      "bytes": 100622137
     }
   ],
   "appStore": "https://apps.apple.com/app/id6797226564"
