@@ -105,10 +105,10 @@ new="$(jq -n --argjson old "$old" \
     | .message_en = keep($en; .message_en)
     | .message_vi = keep($vi; .message_vi)
     | .downloadUrl = keep($url; .downloadUrl)
-    | if ($ios != "" or $minI != "" or $iosv != "" or .ios != null)
-      then .ios = sect(.ios; keep($iosv; $version); $ios; $minI) else . end
-    | if ($macos != "" or $minM != "" or $macv != "" or .macos != null)
-      then .macos = sect(.macos; keep($macv; $version); $macos; $minM) else . end
+    # iOS and macOS always get their own section with an explicit minimum, so a
+    # top-level (Android) minSupportedBuild can never leak onto Apple builds.
+    | .ios = sect(.ios; (if $iosv != "" then $iosv elif $ios != "" then $version else "" end); $ios; $minI)
+    | .macos = sect(.macos; (if $macv != "" then $macv elif $macos != "" then $version else "" end); $macos; $minM)
     | if $clear == 1 then del(.message_en, .message_vi) else . end
     | .updated = $today
     | with_entries(select(.value != null))
@@ -116,9 +116,9 @@ new="$(jq -n --argjson old "$old" \
 
 # Never publish a minimum above the latest build.
 echo "$new" | jq -e '
-  def bad(o): (o.minSupportedBuild // 0) > 0 and o.latestBuild != null and o.minSupportedBuild > o.latestBuild;
+  def bad(o): (o.minSupportedBuild // 0) > 0 and (o.latestBuild == null or o.minSupportedBuild > o.latestBuild);
   (bad(.) or bad(.ios // {}) or bad(.macos // {})) | not' >/dev/null \
-  || die "minSupportedBuild is above latestBuild: that would block the newest app"
+  || die "minSupportedBuild is above latestBuild: that would block the newest app (or the platform latest build is unknown: publish it first)"
 
 if [ "$dry" = 1 ]; then echo "$new" | jq .; exit 0; fi
 

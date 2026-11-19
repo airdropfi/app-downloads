@@ -35,10 +35,10 @@ class UpdatePolicy {
   /// Direct-APK landing page (non-Play Android installs only).
   final String? downloadUrl;
 
-  /// The file has a section for this platform (`ios`, `macos`, `android`):
-  /// its release agent published the platform's own numbers. Apple builds only
-  /// trust the file's "latest" when this is true, because a top-level version
-  /// is the Android one.
+  /// The platform's own section (`ios`, `macos`, `android`) publishes its own
+  /// latest version or build. Apple builds only trust the file's "latest" when
+  /// this is true, because a top-level version is the Android one (a section
+  /// that only sets `minSupportedBuild` does not count).
   final bool hasPlatformSection;
 
   static const empty = UpdatePolicy();
@@ -63,7 +63,10 @@ class UpdatePolicy {
       messageEn: _str(merged['message_en']),
       messageVi: _str(merged['message_vi']),
       downloadUrl: _str(merged['downloadUrl']),
-      hasPlatformSection: section is Map,
+      hasPlatformSection:
+          section is Map &&
+          (section.containsKey('latestVersion') ||
+              section.containsKey('latestBuild')),
     );
   }
 

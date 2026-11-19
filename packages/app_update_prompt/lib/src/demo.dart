@@ -11,21 +11,24 @@ UpdateController demoUpdateController(String mode, UpdateConfig config) {
   assert(kDebugMode, 'demo prompts are debug-only');
   return UpdateController(
     config: config,
-    installed: () async => const InstalledApp(
-      version: '1.0.5',
-      build: 19,
-      target: UpdateTarget.ios,
-    ),
-    fetcher: (uri) async => uri.host == 'itunes.apple.com'
-        ? {
-            'results': [
-              {'version': '99.0.0'},
-            ],
-          }
-        : {
-            'latestVersion': '99.0.0',
-            if (mode == 'required') 'minSupportedBuild': 9999,
-          },
+    installed:
+        () async => const InstalledApp(
+          version: '1.0.5',
+          build: 19,
+          target: UpdateTarget.ios,
+        ),
+    fetcher:
+        (uri) async =>
+            uri.host == 'itunes.apple.com'
+                ? {
+                  'results': [
+                    {'version': '99.0.0'},
+                  ],
+                }
+                : {
+                  'latestVersion': '99.0.0',
+                  if (mode == 'required') 'minSupportedBuild': 9999,
+                },
     store: _MemoryStore(),
     opener: _LogOpener(),
   );

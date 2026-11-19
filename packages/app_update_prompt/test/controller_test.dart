@@ -24,9 +24,10 @@ void main() {
     test(
       'lookup lag: store not newer yet means no prompt even if the policy says so',
       () async {
-        final net = FakeNet()
-          ..lookup = storeAnswer('1.0.5')
-          ..policy = {'latestVersion': '1.0.6', 'latestBuild': 20};
+        final net =
+            FakeNet()
+              ..lookup = storeAnswer('1.0.5')
+              ..policy = {'latestVersion': '1.0.6', 'latestBuild': 20};
         final c = makeController(app: iosApp, net: net);
         await c.check(force: true);
         expect(c.status.kind, UpdateKind.none);
@@ -70,12 +71,13 @@ void main() {
     });
 
     test('Apple unreachable: the live-published policy stands in', () async {
-      final net = FakeNet()
-        ..lookupDown = true
-        ..policy = {
-          'latestVersion': '1.0.6',
-          'ios': {'latestBuild': 20},
-        };
+      final net =
+          FakeNet()
+            ..lookupDown = true
+            ..policy = {
+              'latestVersion': '1.0.6',
+              'ios': {'latestBuild': 20},
+            };
       final c = makeController(app: iosApp, net: net);
       await c.check(force: true);
       expect(c.status.kind, UpdateKind.available);
@@ -84,9 +86,10 @@ void main() {
     test(
       'Apple unreachable and no iOS section: the Android numbers are not trusted',
       () async {
-        final net = FakeNet()
-          ..lookupDown = true
-          ..policy = {'latestVersion': '1.0.6', 'latestBuild': 505};
+        final net =
+            FakeNet()
+              ..lookupDown = true
+              ..policy = {'latestVersion': '1.0.6', 'latestBuild': 505};
         final c = makeController(app: iosApp, net: net);
         await c.check(force: true);
         expect(c.status.kind, UpdateKind.none);
@@ -160,19 +163,28 @@ void main() {
       expect(net.requests.length, n);
     });
 
-    test('a failed fetch does not use up the window', () async {
-      final now = DateTime(2026, 11, 19, 8);
-      final net = FakeNet()
-        ..policyDown = true
-        ..lookupDown = true;
-      final c = makeController(app: iosApp, net: net, clock: () => now);
-      await c.check();
-      net.policyDown = false;
-      net.lookupDown = false;
-      net.lookup = storeAnswer('1.0.6');
-      await c.check();
-      expect(c.status.kind, UpdateKind.available);
-    });
+    test(
+      'a failed fetch is retried after 30 minutes, not on every resume',
+      () async {
+        var now = DateTime(2026, 11, 19, 8);
+        final net =
+            FakeNet()
+              ..policyDown = true
+              ..lookupDown = true;
+        final c = makeController(app: iosApp, net: net, clock: () => now);
+        await c.check();
+        final n = net.requests.length;
+        net.policyDown = false;
+        net.lookupDown = false;
+        net.lookup = storeAnswer('1.0.6');
+        now = now.add(const Duration(minutes: 10));
+        await c.check();
+        expect(net.requests.length, n, reason: 'inside the 30 minute backoff');
+        now = now.add(const Duration(minutes: 21));
+        await c.check();
+        expect(c.status.kind, UpdateKind.available);
+      },
+    );
 
     test('force skips the throttle', () async {
       final now = DateTime(2026, 11, 19, 8);
@@ -215,9 +227,10 @@ void main() {
 
   group('fail-open', () {
     test('everything down: no prompt, no throw', () async {
-      final net = FakeNet()
-        ..policyDown = true
-        ..lookupDown = true;
+      final net =
+          FakeNet()
+            ..policyDown = true
+            ..lookupDown = true;
       final c = makeController(app: iosApp, net: net);
       await c.check(force: true);
       expect(c.status.kind, UpdateKind.none);
@@ -237,9 +250,10 @@ void main() {
     });
 
     test('a broken policy document never blocks', () async {
-      final net = FakeNet()
-        ..policy = {'minSupportedBuild': 'banana', 'latestBuild': []}
-        ..lookup = storeAnswer('1.0.5');
+      final net =
+          FakeNet()
+            ..policy = {'minSupportedBuild': 'banana', 'latestBuild': []}
+            ..lookup = storeAnswer('1.0.5');
       final c = makeController(app: iosApp, net: net);
       await c.check(force: true);
       expect(c.isRequired, isFalse);
@@ -260,9 +274,10 @@ void main() {
     });
 
     test('never blocked by default (minSupportedBuild absent or 0)', () async {
-      final net = FakeNet()
-        ..policy = {'latestVersion': '1.0.9', 'latestBuild': 99}
-        ..lookup = storeAnswer('1.0.9');
+      final net =
+          FakeNet()
+            ..policy = {'latestVersion': '1.0.9', 'latestBuild': 99}
+            ..lookup = storeAnswer('1.0.9');
       final c = makeController(app: iosApp, net: net);
       await c.check(force: true);
       expect(c.isRequired, isFalse);
@@ -287,9 +302,10 @@ void main() {
 
   group('minSupportedBuild', () {
     test('a build below the minimum is required', () async {
-      final net = FakeNet()
-        ..policy = {'minSupportedBuild': 20, 'message_en': 'Fix inside.'}
-        ..lookup = storeAnswer('1.0.6');
+      final net =
+          FakeNet()
+            ..policy = {'minSupportedBuild': 20, 'message_en': 'Fix inside.'}
+            ..lookup = storeAnswer('1.0.6');
       final c = makeController(app: iosApp, net: net);
       await c.check(force: true);
       expect(c.isRequired, isTrue);
@@ -304,11 +320,12 @@ void main() {
     });
 
     test('iOS and Android builds are separate numbers', () async {
-      final net = FakeNet()
-        ..policy = {
-          'minSupportedBuild': 600,
-          'ios': {'minSupportedBuild': 12},
-        };
+      final net =
+          FakeNet()
+            ..policy = {
+              'minSupportedBuild': 600,
+              'ios': {'minSupportedBuild': 12},
+            };
       final ios = makeController(app: iosApp, net: net);
       await ios.check(force: true);
       expect(ios.isRequired, isFalse); // 19 >= 12
@@ -325,9 +342,10 @@ void main() {
         net: net,
         store: store,
       ).check(force: true);
-      final offline = FakeNet()
-        ..policyDown = true
-        ..lookupDown = true;
+      final offline =
+          FakeNet()
+            ..policyDown = true
+            ..lookupDown = true;
       final c = makeController(app: iosApp, net: offline, store: store);
       await c.start();
       expect(c.isRequired, isTrue);
@@ -399,12 +417,13 @@ void main() {
     test(
       'flexible update starts on its own and the snackbar state follows',
       () async {
-        final play = FakePlay()
-          ..info = const PlayUpdateInfo(
-            availability: PlayAvailability.available,
-            flexibleAllowed: true,
-            immediateAllowed: true,
-          );
+        final play =
+            FakePlay()
+              ..info = const PlayUpdateInfo(
+                availability: PlayAvailability.available,
+                flexibleAllowed: true,
+                immediateAllowed: true,
+              );
         final net = FakeNet()..policy = {'latestVersion': '1.0.6'};
         final c = makeController(
           app: playApp,
@@ -429,11 +448,12 @@ void main() {
     );
 
     test('Kids apps: no auto start, the parent starts it', () async {
-      final play = FakePlay()
-        ..info = const PlayUpdateInfo(
-          availability: PlayAvailability.available,
-          flexibleAllowed: true,
-        );
+      final play =
+          FakePlay()
+            ..info = const PlayUpdateInfo(
+              availability: PlayAvailability.available,
+              flexibleAllowed: true,
+            );
       final c = makeController(
         app: playApp,
         net: FakeNet(),
@@ -451,20 +471,22 @@ void main() {
     });
 
     test('declining the Play dialog dismisses the banner', () async {
-      final play = FakePlay()
-        ..flexible = PlayStartResult.declined
-        ..info = const PlayUpdateInfo(
-          availability: PlayAvailability.available,
-          flexibleAllowed: true,
-        );
+      final play =
+          FakePlay()
+            ..flexible = PlayStartResult.declined
+            ..info = const PlayUpdateInfo(
+              availability: PlayAvailability.available,
+              flexibleAllowed: true,
+            );
       final c = makeController(app: playApp, net: FakeNet(), play: play);
       await c.check(force: true);
       expect(c.showBanner, isFalse);
     });
 
     test('no update on Play: nothing shown', () async {
-      final play = FakePlay()
-        ..info = const PlayUpdateInfo(availability: PlayAvailability.none);
+      final play =
+          FakePlay()
+            ..info = const PlayUpdateInfo(availability: PlayAvailability.none);
       final c = makeController(app: playApp, net: FakeNet(), play: play);
       await c.check(force: true);
       expect(c.status.kind, UpdateKind.none);
@@ -477,12 +499,13 @@ void main() {
     });
 
     test('below minSupportedBuild: immediate update', () async {
-      final play = FakePlay()
-        ..info = const PlayUpdateInfo(
-          availability: PlayAvailability.available,
-          flexibleAllowed: true,
-          immediateAllowed: true,
-        );
+      final play =
+          FakePlay()
+            ..info = const PlayUpdateInfo(
+              availability: PlayAvailability.available,
+              flexibleAllowed: true,
+              immediateAllowed: true,
+            );
       final net = FakeNet()..policy = {'minSupportedBuild': 600};
       final c = makeController(app: playApp, net: net, play: play);
       await c.check(force: true);
@@ -495,8 +518,11 @@ void main() {
     test(
       'blocked but Play has nothing: falls back to the Play listing',
       () async {
-        final play = FakePlay()
-          ..info = const PlayUpdateInfo(availability: PlayAvailability.none);
+        final play =
+            FakePlay()
+              ..info = const PlayUpdateInfo(
+                availability: PlayAvailability.none,
+              );
         final opener = FakeOpener();
         final net = FakeNet()..policy = {'minSupportedBuild': 600};
         final c = makeController(
@@ -519,13 +545,14 @@ void main() {
   group('Android: direct APK', () {
     test('newer build in the policy shows the downloads link', () async {
       final opener = FakeOpener();
-      final net = FakeNet()
-        ..policy = {
-          'latestVersion': '1.0.5',
-          'latestBuild': 505,
-          'downloadUrl':
-              'https://github.com/airdropfi/app-downloads/releases/tag/x',
-        };
+      final net =
+          FakeNet()
+            ..policy = {
+              'latestVersion': '1.0.5',
+              'latestBuild': 505,
+              'downloadUrl':
+                  'https://github.com/airdropfi/app-downloads/releases/tag/x',
+            };
       final c = makeController(app: directApp, net: net, opener: opener);
       await c.check(force: true);
       expect(c.showBanner, isTrue);
@@ -534,20 +561,21 @@ void main() {
     });
 
     test('same build: nothing', () async {
-      final net = FakeNet()
-        ..policy = {
-          'latestVersion': '1.0.5',
-          'latestBuild': 504,
-          'downloadUrl': 'https://x.test',
-        };
+      final net =
+          FakeNet()
+            ..policy = {
+              'latestVersion': '1.0.5',
+              'latestBuild': 504,
+              'downloadUrl': 'https://x.test',
+            };
       final c = makeController(app: directApp, net: net);
       await c.check(force: true);
       expect(c.status.kind, UpdateKind.none);
     });
 
     test('no download link published: nothing to offer', () async {
-      final net = FakeNet()
-        ..policy = {'latestVersion': '1.0.9', 'latestBuild': 900};
+      final net =
+          FakeNet()..policy = {'latestVersion': '1.0.9', 'latestBuild': 900};
       final c = makeController(app: directApp, net: net);
       await c.check(force: true);
       expect(c.status.kind, UpdateKind.none);
@@ -593,5 +621,52 @@ void main() {
       expect(d(TargetPlatform.windows), UpdateTarget.unsupported);
       expect(d(TargetPlatform.iOS, web: true), UpdateTarget.unsupported);
     });
+  });
+
+  group('review fixes', () {
+    test('macOS without an App Store id opens nothing', () async {
+      final opener = FakeOpener();
+      final c = makeController(
+        app: const InstalledApp(
+          version: '1.0.5',
+          build: 5,
+          target: UpdateTarget.macos,
+        ),
+        net: FakeNet(),
+        opener: opener,
+        config: const UpdateConfig(policyUrl: policyUrl),
+      );
+      expect(await c.performUpdate(), isFalse);
+      expect(opener.opened, isEmpty);
+    });
+
+    test(
+      'an ios section that only sets the minimum is not a published latest',
+      () {
+        final p = UpdatePolicy.fromJson({
+          'latestVersion': '1.0.6',
+          'ios': {'minSupportedBuild': 0},
+        }, 'ios');
+        expect(p.hasPlatformSection, isFalse);
+        final q = UpdatePolicy.fromJson({
+          'ios': {'latestBuild': 20},
+        }, 'ios');
+        expect(q.hasPlatformSection, isTrue);
+      },
+    );
+
+    test(
+      'a block with nowhere to send the user is not shown (no store id)',
+      () async {
+        final net = FakeNet()..policy = {'minSupportedBuild': 20};
+        final c = makeController(
+          app: iosApp,
+          net: net,
+          config: const UpdateConfig(policyUrl: policyUrl),
+        );
+        await c.check(force: true);
+        expect(c.isRequired, isFalse);
+      },
+    );
   });
 }

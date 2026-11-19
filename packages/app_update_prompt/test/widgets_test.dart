@@ -29,10 +29,13 @@ Widget host(
     Locale('ko'),
     Locale('ja'),
   ],
-  builder: (c, child) => MediaQuery(
-    data: MediaQuery.of(c).copyWith(textScaler: TextScaler.linear(textScale)),
-    child: child!,
-  ),
+  builder:
+      (c, child) => MediaQuery(
+        data: MediaQuery.of(
+          c,
+        ).copyWith(textScaler: TextScaler.linear(textScale)),
+        child: child!,
+      ),
   home: Scaffold(body: body),
 );
 
@@ -153,12 +156,13 @@ void main() {
     });
 
     testWidgets('a downloaded Play update offers Restart', (t) async {
-      final play = FakePlay()
-        ..info = const PlayUpdateInfo(
-          availability: PlayAvailability.available,
-          flexibleAllowed: true,
-          downloaded: true,
-        );
+      final play =
+          FakePlay()
+            ..info = const PlayUpdateInfo(
+              availability: PlayAvailability.available,
+              flexibleAllowed: true,
+              downloaded: true,
+            );
       final c = makeController(app: playApp, net: FakeNet(), play: play);
       await c.check(force: true);
       await t.pumpWidget(host(UpdateBanner(controller: c)));
@@ -172,12 +176,13 @@ void main() {
     Widget slotApp(UpdateController c, {bool enabled = true, Widget? page}) =>
         MaterialApp(
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          builder: (context, child) => MediaQuery(
-            data: MediaQuery.of(
-              context,
-            ).copyWith(padding: const EdgeInsets.only(top: 47, bottom: 34)),
-            child: child!,
-          ),
+          builder:
+              (context, child) => MediaQuery(
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(padding: const EdgeInsets.only(top: 47, bottom: 34)),
+                child: child!,
+              ),
           home: UpdateBannerSlot(
             controller: c,
             enabled: enabled,
@@ -196,9 +201,8 @@ void main() {
           greaterThanOrEqualTo(47),
           reason: 'below the status bar',
         );
-        final bannerBottom = t
-            .getBottomLeft(find.byKey(const Key('update_banner')))
-            .dy;
+        final bannerBottom =
+            t.getBottomLeft(find.byKey(const Key('update_banner'))).dy;
         final page = t.getTopLeft(find.text('page')).dy;
         expect(
           page - bannerBottom,
@@ -241,20 +245,22 @@ void main() {
       BeforeUpdate? gate,
     }) => MaterialApp(
       navigatorKey: nav,
-      builder: (context, child) => UpdatePromptHost(
-        controller: c,
-        navigatorKey: nav,
-        beforeUpdate: gate,
-        child: child!,
-      ),
+      builder:
+          (context, child) => UpdatePromptHost(
+            controller: c,
+            navigatorKey: nav,
+            beforeUpdate: gate,
+            child: child!,
+          ),
       home: const Scaffold(body: Text('app home')),
     );
 
     testWidgets(
       'a blocked build gets the Please update screen, not a way out',
       (t) async {
-        final net = FakeNet()
-          ..policy = {'minSupportedBuild': 20, 'message_en': 'Fix inside.'};
+        final net =
+            FakeNet()
+              ..policy = {'minSupportedBuild': 20, 'message_en': 'Fix inside.'};
         final opener = FakeOpener();
         final c = makeController(app: iosApp, net: net, opener: opener);
         final nav = GlobalKey<NavigatorState>();
@@ -328,12 +334,13 @@ void main() {
     });
 
     testWidgets('Vietnamese server message wins in Vietnamese', (t) async {
-      final net = FakeNet()
-        ..policy = {
-          'minSupportedBuild': 20,
-          'message_en': 'EN',
-          'message_vi': 'VI',
-        };
+      final net =
+          FakeNet()
+            ..policy = {
+              'minSupportedBuild': 20,
+              'message_en': 'EN',
+              'message_vi': 'VI',
+            };
       final c = makeController(app: iosApp, net: net);
       final nav = GlobalKey<NavigatorState>();
       await t.pumpWidget(
@@ -342,8 +349,12 @@ void main() {
           locale: const Locale('vi'),
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           supportedLocales: const [Locale('vi')],
-          builder: (context, child) =>
-              UpdatePromptHost(controller: c, navigatorKey: nav, child: child!),
+          builder:
+              (context, child) => UpdatePromptHost(
+                controller: c,
+                navigatorKey: nav,
+                child: child!,
+              ),
           home: const Scaffold(),
         ),
       );
@@ -353,11 +364,12 @@ void main() {
     });
 
     testWidgets('Play flexible download shows a Restart snackbar', (t) async {
-      final play = FakePlay()
-        ..info = const PlayUpdateInfo(
-          availability: PlayAvailability.available,
-          flexibleAllowed: true,
-        );
+      final play =
+          FakePlay()
+            ..info = const PlayUpdateInfo(
+              availability: PlayAvailability.available,
+              flexibleAllowed: true,
+            );
       final c = makeController(app: playApp, net: FakeNet(), play: play);
       final nav = GlobalKey<NavigatorState>();
       await t.pumpWidget(app(c, nav));

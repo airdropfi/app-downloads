@@ -10,6 +10,7 @@ import 'status.dart';
 import 'version.dart';
 
 const _kLastCheck = 'app_update_prompt.lastCheckMs';
+const _retryAfter = Duration(minutes: 30);
 const _kPolicy = 'app_update_prompt.policy';
 const _kDismissedVersion = 'app_update_prompt.dismissedVersion';
 const _kDismissedAt = 'app_update_prompt.dismissedAtMs';
@@ -125,7 +126,7 @@ class UpdateController extends ChangeNotifier with WidgetsBindingObserver {
         policy = await _cachedPolicy() ?? UpdatePolicy.empty;
       }
 
-      if (isBlocked(policy, app)) {
+      if (_mustBlock(policy, app)) {
         _apply(
           UpdateStatus(
             kind: UpdateKind.required,
@@ -137,7 +138,14 @@ class UpdateController extends ChangeNotifier with WidgetsBindingObserver {
       } else {
         _apply(await _softStatus(policy, app));
       }
-      if (json != null) await _store.setInt(_kLastCheck, nowMs);
+      // A failed or missing policy (offline, 404 before the file exists) must
+      // not turn every resume into a request: retry after 30 minutes.
+      await _store.setInt(
+        _kLastCheck,
+        json != null
+            ? nowMs
+            : nowMs - (config.throttle - _retryAfter).inMilliseconds,
+      );
       await _maybeStartFlexible();
     } catch (_) {
       // fail open: keep whatever status we had
@@ -169,9 +177,9 @@ class UpdateController extends ChangeNotifier with WidgetsBindingObserver {
             ) ||
             await _opener.open(Uri.parse('https://apps.apple.com/app/id$id'));
       case UpdateTarget.macos:
-        return _opener.open(
-          Uri.parse('https://apps.apple.com/app/id${config.appStoreId}'),
-        );
+        final macId = config.appStoreId;
+        if (macId == null) return false;
+        return _opener.open(Uri.parse('https://apps.apple.com/app/id$macId'));
       case UpdateTarget.androidDirect:
         final url = _status.policy.downloadUrl;
         if (url == null) return false;
@@ -219,11 +227,23 @@ class UpdateController extends ChangeNotifier with WidgetsBindingObserver {
         );
   }
 
+  /// A build is blocked only when the blocking screen has somewhere to send
+  /// the user: a store page (Apple needs an id), the Play listing, or a
+  /// published download link. Otherwise its only button would do nothing.
+  bool _mustBlock(UpdatePolicy policy, InstalledApp app) {
+    if (!isBlocked(policy, app)) return false;
+    return switch (app.target) {
+      UpdateTarget.ios || UpdateTarget.macos => config.appStoreId != null,
+      UpdateTarget.androidDirect => policy.downloadUrl != null,
+      UpdateTarget.androidPlay => true,
+      _ => false,
+    };
+  }
   // ---- status evaluation --------------------------------------------------
 
   /// Status that needs no network: blocked or a direct-APK build gap.
   UpdateStatus _statusFromPolicyOnly(UpdatePolicy policy, InstalledApp app) {
-    if (isBlocked(policy, app)) {
+    if (_mustBlock(policy, app)) {
       return UpdateStatus(
         kind: UpdateKind.required,
         latestVersion: policy.latestVersion,
@@ -261,28 +281,28 @@ class UpdateController extends ChangeNotifier with WidgetsBindingObserver {
           final v = store.version;
           return v != null && isNewerVersion(v, app.version)
               ? UpdateStatus(
-                  kind: UpdateKind.available,
-                  latestVersion: v,
-                  policy: policy,
-                )
+                kind: UpdateKind.available,
+                latestVersion: v,
+                policy: policy,
+              )
               : UpdateStatus(policy: policy);
         }
         // Apple unreachable: the policy's own iOS/macOS section (published
         // only once that version is live) stands in.
         return policy.hasPlatformSection && _policyNewer(policy, app)
             ? UpdateStatus(
-                kind: UpdateKind.available,
-                latestVersion: policy.latestVersion,
-                policy: policy,
-              )
+              kind: UpdateKind.available,
+              latestVersion: policy.latestVersion,
+              policy: policy,
+            )
             : UpdateStatus(policy: policy);
       case UpdateTarget.androidDirect:
         return policy.downloadUrl != null && _policyNewer(policy, app)
             ? UpdateStatus(
-                kind: UpdateKind.available,
-                latestVersion: policy.latestVersion,
-                policy: policy,
-              )
+              kind: UpdateKind.available,
+              latestVersion: policy.latestVersion,
+              policy: policy,
+            )
             : UpdateStatus(policy: policy);
       case UpdateTarget.androidPlay:
         PlayUpdateInfo? info;
@@ -303,13 +323,14 @@ class UpdateController extends ChangeNotifier with WidgetsBindingObserver {
         }
         return info.availability == PlayAvailability.available
             ? UpdateStatus(
-                kind: UpdateKind.available,
-                latestVersion: policy.latestVersion,
-                policy: policy,
-                stage: _status.stage == UpdateStage.downloading
-                    ? UpdateStage.downloading
-                    : UpdateStage.idle,
-              )
+              kind: UpdateKind.available,
+              latestVersion: policy.latestVersion,
+              policy: policy,
+              stage:
+                  _status.stage == UpdateStage.downloading
+                      ? UpdateStage.downloading
+                      : UpdateStage.idle,
+            )
             : UpdateStatus(policy: policy);
       case UpdateTarget.androidOther:
       case UpdateTarget.unsupported:

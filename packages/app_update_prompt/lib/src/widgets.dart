@@ -87,11 +87,12 @@ class UpdateBanner extends StatelessWidget {
                               alignment: AlignmentDirectional.centerStart,
                               child: Text(
                                 restart ? copy.downloadedTitle : copy.title,
-                                style: Theme.of(context).textTheme.titleMedium
-                                    ?.copyWith(
-                                      color: scheme.onPrimaryContainer,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleMedium?.copyWith(
+                                  color: scheme.onPrimaryContainer,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                             ),
                           ),
@@ -108,13 +109,14 @@ class UpdateBanner extends StatelessWidget {
                                     kUpdateButtonHeight,
                                   ),
                                 ),
-                                onPressed: restart
-                                    ? controller.restartToUpdate
-                                    : () => _runUpdate(
-                                        context,
-                                        controller,
-                                        beforeUpdate,
-                                      ),
+                                onPressed:
+                                    restart
+                                        ? controller.restartToUpdate
+                                        : () => _runUpdate(
+                                          context,
+                                          controller,
+                                          beforeUpdate,
+                                        ),
                                 child: Text(
                                   restart ? copy.restart : copy.update,
                                 ),
@@ -189,12 +191,12 @@ class UpdateBannerSlot extends StatelessWidget {
             // (and state) when the banner comes and goes.
             show
                 ? SafeArea(
-                    bottom: false,
-                    child: UpdateBanner(
-                      controller: controller,
-                      beforeUpdate: beforeUpdate,
-                    ),
-                  )
+                  bottom: false,
+                  child: UpdateBanner(
+                    controller: controller,
+                    beforeUpdate: beforeUpdate,
+                  ),
+                )
                 : const SizedBox.shrink(),
             Expanded(
               child: MediaQuery.removePadding(
@@ -280,8 +282,8 @@ class UpdateRequiredScreen extends StatelessWidget {
                             kUpdateButtonHeight,
                           ),
                         ),
-                        onPressed: () =>
-                            _runUpdate(context, controller, beforeUpdate),
+                        onPressed:
+                            () => _runUpdate(context, controller, beforeUpdate),
                         child: Text(copy.update),
                       ),
                     ),
@@ -368,11 +370,12 @@ class _UpdatePromptHostState extends State<UpdatePromptHost> {
       final route = PageRouteBuilder<void>(
         opaque: true,
         transitionDuration: const Duration(milliseconds: 200),
-        pageBuilder: (context, _, _) => UpdateRequiredScreen(
-          controller: c,
-          config: c.config,
-          beforeUpdate: widget.beforeUpdate,
-        ),
+        pageBuilder:
+            (context, _, _) => UpdateRequiredScreen(
+              controller: c,
+              config: c.config,
+              beforeUpdate: widget.beforeUpdate,
+            ),
       );
       _route = route;
       nav.push(route);

@@ -21,9 +21,10 @@ UpdateController createUpdateController(UpdateConfig config) {
     fetcher: httpJsonFetcher(),
     store: PrefsKeyValueStore(),
     opener: UrlLauncherOpener(),
-    play: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
-        ? InAppUpdatePlayUpdater()
-        : null,
+    play:
+        !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+            ? InAppUpdatePlayUpdater()
+            : null,
     regionCode: () => PlatformDispatcher.instance.locale.countryCode,
   );
 }
@@ -136,8 +137,8 @@ class InAppUpdatePlayUpdater implements PlayUpdater {
       return PlayUpdateInfo(
         availability:
             i.updateAvailability == iau.UpdateAvailability.updateAvailable
-            ? PlayAvailability.available
-            : PlayAvailability.none,
+                ? PlayAvailability.available
+                : PlayAvailability.none,
         flexibleAllowed: i.flexibleUpdateAllowed,
         immediateAllowed: i.immediateUpdateAllowed,
         downloaded: i.installStatus == iau.InstallStatus.downloaded,
