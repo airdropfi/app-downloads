@@ -1,0 +1,14 @@
+{
+  "app": "sportmo",
+  "latestVersion": "1.0.0",
+  "latestBuild": 2,
+  "minSupportedBuild": 0,
+  "downloadUrl": "https://github.com/airdropfi/app-downloads/releases/tag/sportmo-v1.0.0",
+  "updated": "2026-11-19",
+  "ios": {
+    "minSupportedBuild": 0
+  },
+  "macos": {
+    "minSupportedBuild": 0
+  }
+}

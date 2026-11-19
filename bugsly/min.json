@@ -1,0 +1,14 @@
+{
+  "app": "bugsly",
+  "latestVersion": "1.0.2",
+  "latestBuild": 4,
+  "minSupportedBuild": 0,
+  "downloadUrl": "https://github.com/airdropfi/app-downloads/releases/tag/bugsly-v1.0.2",
+  "updated": "2026-11-19",
+  "ios": {
+    "minSupportedBuild": 0
+  },
+  "macos": {
+    "minSupportedBuild": 0
+  }
+}
