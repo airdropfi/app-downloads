@@ -168,6 +168,72 @@ void main() {
     });
   });
 
+  group('UpdateBannerSlot', () {
+    Widget slotApp(UpdateController c, {bool enabled = true, Widget? page}) =>
+        MaterialApp(
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(
+              context,
+            ).copyWith(padding: const EdgeInsets.only(top: 47, bottom: 34)),
+            child: child!,
+          ),
+          home: UpdateBannerSlot(
+            controller: c,
+            enabled: enabled,
+            child: page ?? const SafeArea(child: Text('page')),
+          ),
+        );
+
+    testWidgets(
+      'the banner clears the status bar and the page is not padded twice',
+      (t) async {
+        final c = await availableIos(FakeOpener());
+        await t.pumpWidget(slotApp(c));
+        final banner = t.getTopLeft(find.byKey(const Key('update_banner')));
+        expect(
+          banner.dy,
+          greaterThanOrEqualTo(47),
+          reason: 'below the status bar',
+        );
+        final bannerBottom = t
+            .getBottomLeft(find.byKey(const Key('update_banner')))
+            .dy;
+        final page = t.getTopLeft(find.text('page')).dy;
+        expect(
+          page - bannerBottom,
+          lessThan(30),
+          reason: 'no second 47 dp inset',
+        );
+      },
+    );
+
+    testWidgets('without a banner the page keeps its own inset and its state', (
+      t,
+    ) async {
+      final c = makeController(app: iosApp, net: FakeNet());
+      await t.pumpWidget(slotApp(c, page: const SafeArea(child: _Counter())));
+      expect(t.getTopLeft(find.byType(_Counter)).dy, 47);
+      await t.tap(find.byType(_Counter));
+      await t.pump();
+      expect(find.text('count 1'), findsOneWidget);
+      // the banner appears: the page keeps its state
+      final net = FakeNet()..lookup = storeAnswer('1.0.6');
+      final c2 = makeController(app: iosApp, net: net);
+      await t.pumpWidget(slotApp(c2, page: const SafeArea(child: _Counter())));
+      await c2.check(force: true);
+      await t.pump();
+      expect(find.byKey(const Key('update_banner')), findsOneWidget);
+      expect(find.text('count 1'), findsOneWidget);
+    });
+
+    testWidgets('enabled false hides it', (t) async {
+      final c = await availableIos(FakeOpener());
+      await t.pumpWidget(slotApp(c, enabled: false));
+      expect(find.byKey(const Key('update_banner')), findsNothing);
+    });
+  });
+
   group('UpdatePromptHost', () {
     Widget app(
       UpdateController c,
@@ -303,4 +369,19 @@ void main() {
       expect(play.completeCalls, 1);
     });
   });
+}
+
+class _Counter extends StatefulWidget {
+  const _Counter();
+  @override
+  State<_Counter> createState() => _CounterState();
+}
+
+class _CounterState extends State<_Counter> {
+  int n = 0;
+  @override
+  Widget build(BuildContext context) => GestureDetector(
+    onTap: () => setState(() => n++),
+    child: Text('count $n'),
+  );
 }

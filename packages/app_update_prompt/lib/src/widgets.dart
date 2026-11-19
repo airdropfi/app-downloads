@@ -152,6 +152,64 @@ class UpdateBanner extends StatelessWidget {
   }
 }
 
+/// Puts the banner above a page that draws its own top inset (a shell around
+/// screens with their own SafeArea/AppBar). While the banner shows, it takes
+/// the status-bar inset itself and the page below is told the top inset is
+/// already used, so nothing is padded twice. The tree is the same whether or
+/// not the banner shows, so the page keeps its state.
+///
+/// A banner inside a screen's own body (below its AppBar) needs no slot: use
+/// [UpdateBanner] directly.
+class UpdateBannerSlot extends StatelessWidget {
+  const UpdateBannerSlot({
+    super.key,
+    required this.controller,
+    required this.child,
+    this.beforeUpdate,
+    this.enabled = true,
+  });
+
+  final UpdateController controller;
+  final Widget child;
+  final BeforeUpdate? beforeUpdate;
+
+  /// False on pages that must not carry the banner (only the home does).
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (context, _) {
+        final show =
+            enabled && (controller.showBanner || controller.readyToRestart);
+        return Column(
+          children: [
+            // Always one child here, so the page below keeps its element
+            // (and state) when the banner comes and goes.
+            show
+                ? SafeArea(
+                    bottom: false,
+                    child: UpdateBanner(
+                      controller: controller,
+                      beforeUpdate: beforeUpdate,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            Expanded(
+              child: MediaQuery.removePadding(
+                context: context,
+                removeTop: show,
+                child: child,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 /// The blocking "Please update" screen for builds the server marked broken.
 /// Friendly and calm: no error codes, one big button.
 class UpdateRequiredScreen extends StatelessWidget {
