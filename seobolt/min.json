@@ -1,0 +1,15 @@
+{
+  "app": "seobolt",
+  "minSupportedBuild": 0,
+  "ios": {
+    "latestVersion": "1.0.1",
+    "latestBuild": 13,
+    "minSupportedBuild": 0
+  },
+  "macos": {
+    "latestVersion": "1.0.1",
+    "latestBuild": 12,
+    "minSupportedBuild": 0
+  },
+  "updated": "2026-11-19"
+}
