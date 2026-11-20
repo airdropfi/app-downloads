@@ -11,8 +11,8 @@
     "minSupportedBuild": 0
   },
   "macos": {
-    "latestVersion": "1.0.1",
-    "latestBuild": 4,
+    "latestVersion": "1.0.6",
+    "latestBuild": 18,
     "minSupportedBuild": 0
   }
 }
