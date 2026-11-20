@@ -1,0 +1,13 @@
+{
+  "app": "offpaint",
+  "minSupportedBuild": 0,
+  "ios": {
+    "minSupportedBuild": 0
+  },
+  "macos": {
+    "latestVersion": "1.0.4",
+    "latestBuild": 9,
+    "minSupportedBuild": 0
+  },
+  "updated": "2026-11-20"
+}
