@@ -7,8 +7,8 @@
     "minSupportedBuild": 0
   },
   "macos": {
-    "latestVersion": "1.0.1",
-    "latestBuild": 12,
+    "latestVersion": "1.0.2",
+    "latestBuild": 15,
     "minSupportedBuild": 0
   },
   "updated": "2026-11-20"
